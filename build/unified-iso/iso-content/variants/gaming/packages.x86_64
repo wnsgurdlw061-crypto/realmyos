@@ -1,0 +1,236 @@
+# Gaming Variant (4GB) - 게이밍 최적화
+# UnifiedArch OS Gaming Package List
+
+# Base system (gaming optimized)
+base
+base-devel
+linux-zen
+linux-zen-headers
+linux-firmware
+
+# Gaming kernel modules
+linux-zen
+acpi_call
+tlp
+auto-cpufreq
+
+# Essential tools
+arch-install-scripts
+pacman
+curl
+wget
+git
+vim
+nano
+fish
+zsh
+htop
+btop
+neofetch
+
+# Network (low latency)
+networkmanager
+network-manager-applet
+wireless_tools
+wpa_supplicant
+openvpn
+wireguard-tools
+
+# Display drivers (latest gaming optimized)
+xf86-video-amdgpu
+xf86-video-intel
+xf86-video-nouveau
+xf86-video-nvidia
+nvidia-settings
+nvidia-utils
+mesa
+vulkan-radeon
+vulkan-intel
+vulkan-nvidia
+libva-mesa-driver
+libva-intel-driver
+libva-nvidia-driver
+
+# Gaming desktop environment (KDE Plasma optimized)
+kdebase
+plasma
+kde-applications
+sddm
+kwin
+plasma-wayland-session
+gamescope
+
+# Window managers (for gaming)
+i3-wm
+i3status
+i3lock
+dmenu
+rofi
+picom
+
+# Gaming platforms and launchers
+steam
+steam-native-runtime
+lutris
+heroic-games-launcher
+bottles
+protonup-qt
+steamtinkerlaunch
+
+# Wine and compatibility layers
+wine
+wine-staging
+winetricks
+proton-ge-custom
+dxvk
+vkd3d
+
+# Gaming utilities
+gamemode
+gamescope
+mangohud
+ goverlay
+lib32-gamemode
+lib32-mangohud
+
+# Performance monitoring
+nvtop
+goverlay
+corectrl
+tuxclocker
+
+# Audio (low latency)
+pipewire
+pipewire-pulse
+pipewire-alsa
+wireplumber
+easyeffects
+pulseeffects
+
+# Graphics and recording
+obs-studio
+obs-plugins
+kdenlive
+ffmpeg
+gimp
+blender
+krita
+
+# Development tools (for modding)
+code
+vim
+git
+gcc
+make
+cmake
+python
+python-pip
+nodejs
+npm
+
+# System optimization
+tuned
+cpupower
+thermald
+auto-cpufreq
+tlp
+prelink
+
+# Browser (gaming optimized)
+firefox
+firefox-i18n-ko
+chromium
+brave-browser
+
+# Communication
+discord
+teamspeak3
+mumble
+
+# Game servers
+steamcmd
+terraria-server
+minecraft-server
+srcds
+
+# Emulators
+retroarch
+libretro
+dolphin-emu
+citra
+yuzu
+rpcs3
+pcsx2
+duckstation
+mupen64plus
+snes9x
+bsnes
+mgba
+
+# Fonts (gaming optimized)
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+ttf-liberation
+ttf-dejavu
+ttf-roboto
+
+# Codecs
+gstreamer
+gst-plugins-good
+gst-plugins-bad
+gst-plugins-ugly
+gst-libav
+libva-utils
+
+# Additional gaming libraries
+lib32-alsa-plugins
+lib32-libpulse
+lib32-openal
+lib32-sdl2
+lib32-vulkan-icd-loader
+lib32-vkbasalt
+
+# RGB and peripheral control
+openrgb
+polychromatic
+razer-naga-driver
+
+# Game-specific tools
+lutris-wine-meta
+wine-staging-nine
+dxvk-nvapi
+
+# Performance libraries
+lib32-libc++
+lib32-gcc-libs
+lib32-libudev0-shim
+
+# Storage (for large game libraries)
+exfat-utils
+ntfs-3g
+btrfs-progs
+
+# Network optimization
+net-tools
+iproute2
+ethtool
+tcpreplay
+
+# System monitoring (gaming focused)
+nvtop
+gputop
+iotop
+nethogs
+
+# Gaming themes and aesthetics
+papirus-icon-theme
+arc-gtk-theme
+plasma5-themes-breath
+
+# UnifiedArch gaming packages
+unifiedarch-installer
+unifiedarch-kernel-modules
+unifiedarch-config-gaming
+unifiedarch-gaming-tools
+unifiedarch-performance-tuning

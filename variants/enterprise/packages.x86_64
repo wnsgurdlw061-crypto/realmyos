@@ -1,0 +1,222 @@
+# Enterprise Variant (3GB) - 서버 등급
+# UnifiedArch OS Enterprise Package List
+
+# Base system (server optimized)
+base
+base-devel
+linux-lts
+linux-lts-headers
+linux-firmware
+
+# Server management tools
+arch-install-scripts
+pacman
+curl
+wget
+git
+vim
+nano
+tmux
+screen
+htop
+iotop
+nethogs
+
+# Network infrastructure
+networkmanager
+networkmanager-openvpn
+wireguard-tools
+openssh
+fail2ban
+ufw
+iptables-nft
+nftables
+dnsmasq
+bind
+isc-dhcp
+nginx
+apache
+haproxy
+
+# Database systems
+postgresql
+mysql
+redis
+sqlite
+mongodb
+elasticsearch
+
+# Containerization and virtualization
+docker
+docker-compose
+podman
+buildah
+skopeo
+kubernetes
+kubectl
+helm
+virtualbox
+qemu
+libvirt
+virt-manager
+vagrant
+
+# Monitoring and logging
+prometheus
+grafana
+zabbix
+nagios
+logstash
+kibana
+filebeat
+metricbeat
+telegraf
+influxdb
+
+# Development and build tools
+gcc
+make
+cmake
+git
+python
+python-pip
+nodejs
+npm
+java-runtime-common
+maven
+gradle
+go
+rust
+cargo
+
+# Security tools
+selinux
+apparmor
+audit
+clamav
+rkhunter
+chkrootkit
+gnupg
+openssl
+openssh
+tcpdump
+wireshark-cli
+nmap
+
+# Backup and storage
+borgbackup
+restic
+rsnapshot
+samba
+nfs-utils
+glusterfs
+ceph
+
+# High availability
+pacemaker
+corosync
+keepalived
+heartbeat
+
+# Load balancing
+haproxy
+nginx
+keepalived
+
+# Mail server
+postfix
+dovecot
+spamassassin
+clamav
+procmail
+
+# Directory services
+openldap
+389-ds
+freeipa
+
+# Web services
+apache
+nginx
+php
+php-fpm
+php-gd
+php-mysql
+php-pgsql
+python-mod_wsgi
+
+# Database clients
+postgresql-libs
+mysql-clients
+redis
+sqlite
+mongodb-tools
+
+# System utilities
+lvm2
+mdadm
+smartmontools
+hdparm
+sdparm
+parted
+gptfdisk
+dosfstools
+ntfs-3g
+exfat-utils
+
+# Performance tuning
+performance-tuning
+tuned
+cpupower
+thermald
+powertop
+
+# Logging and audit
+rsyslog
+audit
+systemd-coredump
+
+# Remote access
+openssh
+telnet
+x11vnc
+tigervnc
+
+# File systems
+btrfs-progs
+xfsprogs
+ext4utils
+f2fs-tools
+zfs-utils
+
+# Enterprise monitoring
+netdata
+collectd
+fluentd
+
+# Configuration management
+ansible
+puppet
+salt
+chef
+
+# CI/CD tools
+jenkins
+gitlab-runner
+drone
+
+# Documentation
+doxygen
+sphinx
+mkdocs
+
+# Enterprise fonts
+noto-fonts
+ttf-liberation
+
+# UnifiedArch enterprise packages
+unifiedarch-installer
+unifiedarch-kernel-modules
+unifiedarch-config-enterprise
+unifiedarch-monitoring
+unifiedarch-security

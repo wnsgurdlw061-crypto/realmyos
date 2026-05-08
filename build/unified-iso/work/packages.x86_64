@@ -1,0 +1,70 @@
+# UnifiedArch OS 통합 기본 패키지
+# 모든 변형 버전에 공통적으로 필요한 패키지
+
+# Base system
+base
+base-devel
+linux
+linux-zen
+linux-lts
+linux-firmware
+linux-headers
+
+# Installation tools
+arch-install-scripts
+pacman
+curl
+wget
+git
+vim
+nano
+
+# Network tools
+networkmanager
+network-manager-applet
+wireless_tools
+wpa_supplicant
+
+# Display drivers (full support)
+xf86-video-amdgpu
+xf86-video-intel
+xf86-video-nouveau
+mesa
+vulkan-radeon
+vulkan-intel
+
+# Boot loaders
+grub
+efibootmgr
+refind
+
+# File systems
+dosfstools
+ntfs-3g
+exfat-utils
+btrfs-progs
+xfsprogs
+
+# Compression utilities
+tar
+gzip
+bzip2
+xz
+unzip
+p7zip
+
+# System utilities
+htop
+tree
+jq
+rsync
+
+# Boot menu system
+syslinux
+isolinux
+memtest86+
+
+# UnifiedArch core packages
+unifiedarch-installer
+unifiedarch-kernel-modules
+unifiedarch-config

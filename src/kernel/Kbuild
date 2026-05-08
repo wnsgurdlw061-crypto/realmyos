@@ -1,0 +1,19 @@
+# UnifiedArch OS Kernel Modules Kbuild file
+
+# Core modules
+obj-m += unifiedarch-core.o
+unifiedarch-core-objs := emergency_response.o btrfs_integration.o anomaly_detector.o
+
+# Individual modules for testing
+obj-m += emergency_response.o
+obj-m += btrfs_integration.o  
+obj-m += anomaly_detector.o
+
+# Build configuration
+ccflags-y := -Wall -Wextra -Wno-unused-parameter
+ccflags-y += -DVERSION=\"1.0.0\"
+ccflags-y += -I$(src)/../../include
+ccflags-y += -I$(src)/../include
+
+# Link flags
+ldflags-y :=

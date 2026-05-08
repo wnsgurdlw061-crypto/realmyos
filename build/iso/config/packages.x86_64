@@ -1,0 +1,96 @@
+# UnifiedArch OS ISO 패키지 목록
+# 기본 시스템 패키지
+
+# 기본 시스템
+base
+base-devel
+linux
+linux-firmware
+systemd
+systemd-sysvcompat
+
+# 네트워크 도구
+networkmanager
+network-manager-applet
+wireless_tools
+wpa_supplicant
+bluez
+bluez-utils
+net-tools
+iproute2
+
+# 설치 도구
+arch-install-scripts
+pacman
+curl
+wget
+git
+vim
+nano
+tree
+htop
+
+# 그래픽 시스템
+xorg-server
+xorg-xinit
+mesa
+xf86-video-amdgpu
+xf86-video-intel
+xf86-video-nouveau
+libva-mesa-driver
+
+# 데스크톱 환경
+gnome
+gnome-extra
+gdm
+gnome-shell
+gnome-session
+gnome-control-center
+gnome-terminal
+nautilus
+eog
+evince
+gnome-calculator
+gnome-text-editor
+gnome-screenshot
+
+# 기본 애플리케이션
+firefox
+libreoffice-fresh
+thunderbird
+
+# 멀티미디어 코덱
+gst-plugins-base
+gst-plugins-good
+gst-plugins-bad
+gst-plugins-ugly
+gst-libav
+
+# 폰트
+noto-fonts
+ttf-liberation
+ttf-dejavu
+
+# 오디오
+alsa-utils
+pulseaudio
+pulseaudio-alsa
+
+# 접근성
+orca
+onboard
+caribou
+
+# 개발 도구
+make
+gcc
+pkg-config
+python
+
+# 보안 도구
+ufw
+sudo
+
+# UnifiedArch OS 특정 패키지 (설치 시 복사됨)
+# unifiedarch-installer
+# unifiedarch-kernel-modules

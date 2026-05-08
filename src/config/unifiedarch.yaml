@@ -1,0 +1,148 @@
+# UnifiedArch OS 선언적 시스템 구성
+# 이 파일은 시스템의 모든 설정을 선언적으로 정의합니다
+
+system:
+  name: "UnifiedArch"
+  version: "1.0.0"
+  variant: "standard"  # standard, minimal, enterprise, gaming
+  
+# 시스템 기본 설정
+base:
+  locale: "ko_KR.UTF-8"
+  timezone: "Asia/Seoul"
+  hostname: "unifiedarch"
+  keyboard: "us"
+  
+# Init 시스템 설정
+init_system:
+  type: "systemd"  # systemd, openrc, runit
+  services:
+    enabled:
+      - "networkmanager"
+      - "bluetooth"
+      - "cups"
+    disabled:
+      - "apache"
+      - "mysql"
+
+# 커널 설정
+kernel:
+  type: "linux"  # linux, linux-lts, linux-zen, linux-hardened
+  parameters:
+    - "quiet"
+    - "splash"
+  modules:
+    load:
+      - "nvidia"
+      - "snd_hda_intel"
+
+# 패키지 저장소 설정
+repositories:
+  - name: "core"
+    enabled: true
+    priority: 1
+  - name: "extra"
+    enabled: true
+    priority: 2
+  - name: "community"
+    enabled: true
+    priority: 3
+  - name: "multilib"
+    enabled: false
+    priority: 4
+  - name: "custom-lts"
+    enabled: false
+    priority: 5
+  - name: "custom-bleeding"
+    enabled: false
+    priority: 6
+
+# 데스크톱 환경 설정
+desktop:
+  type: "gnome"  # gnome, kde, xfce, i3, sway, hyprland, none
+  display_manager: "gdm"
+  auto_login: false
+  
+# 보안 설정
+security:
+  firewall:
+    enabled: true
+    type: "ufw"  # ufw, iptables
+    default_policy: "deny"
+  selinux:
+    enabled: false
+    mode: "enforcing"  # enforcing, permissive, disabled
+  apparmor:
+    enabled: true
+  auto_updates:
+    enabled: true
+    schedule: "weekly"
+
+# 네트워크 설정
+network:
+  dhcp: true
+  wifi:
+    enabled: true
+    auto_connect: true
+  vpn:
+    enabled: false
+    type: "openvpn"
+
+# 성능 최적화 설정
+performance:
+  profile: "balanced"  # powersave, balanced, performance
+  cpu_governor: "ondemand"
+  io_scheduler: "cfq"
+  swappiness: 60
+  
+# 백업 설정
+backup:
+  enabled: true
+  tool: "timeshift"
+  schedule: "daily"
+  retention:
+    daily: 7
+    weekly: 4
+    monthly: 12
+
+# 개발 도구 설정 (variant에 따라 다름)
+development:
+  enabled: false
+  languages:
+    - "python"
+    - "nodejs"
+    - "rust"
+  tools:
+    - "git"
+    - "docker"
+    - "vscode"
+
+# 게이밍 설정 (gaming variant)
+gaming:
+  enabled: false
+  steam: true
+  proton: true
+  nvidia_drivers: false
+  amd_drivers: false
+  low_latency_kernel: false
+
+# 기업 설정 (enterprise variant)
+enterprise:
+  enabled: false
+  docker: true
+  kubernetes: false
+  monitoring:
+    prometheus: false
+    grafana: false
+  logging:
+    elasticsearch: false
+    logstash: false
+    kibana: false
+
+# 최소화 설정 (minimal variant)
+minimal:
+  enabled: false
+  gui: false
+  network_tools: true
+  development_tools: false
+  multimedia: false

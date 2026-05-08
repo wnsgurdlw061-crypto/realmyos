@@ -1,0 +1,527 @@
+# 시스템 전체 설정 파일
+# System Configuration File
+
+# 기본 시스템 설정
+system:
+  hostname: "massive-os"
+  domain: "local"
+  locale: "ko_KR.UTF-8"
+  timezone: "Asia/Seoul"
+  keyboard_layout: "kr"
+  language: "korean"
+  
+# 네트워크 설정
+network:
+  hostname_resolution:
+    order: ["files", "dns", "mdns"]
+    timeout: 5
+    attempts: 3
+  
+  interfaces:
+    - name: "eth0"
+      type: "ethernet"
+      method: "dhcp"
+      auto: true
+      mtu: 1500
+      
+    - name: "wlan0"
+      type: "wireless"
+      method: "dhcp"
+      auto: false
+      mtu: 1500
+      wireless:
+        scan: true
+        power_save: true
+        
+    - name: "lo"
+      type: "loopback"
+      method: "static"
+      address: "127.0.0.1"
+      netmask: "255.0.0.0"
+      
+  dns:
+    servers:
+      - "8.8.8.8"
+      - "8.8.4.4"
+      - "1.1.1.1"
+    search_domains:
+      - "local"
+      - "home"
+    timeout: 2
+    
+  firewall:
+    enabled: true
+    default_policy: "drop"
+    rules:
+      - action: "accept"
+        protocol: "tcp"
+        port: 22
+        source: "any"
+      - action: "accept"
+        protocol: "tcp"
+        port: 80
+        source: "any"
+      - action: "accept"
+        protocol: "tcp"
+        port: 443
+        source: "any"
+
+# 스토리지 설정
+storage:
+  disks:
+    - device: "/dev/sda"
+      type: "ssd"
+      partitions:
+        - number: 1
+          type: "efi"
+          size: "512M"
+          filesystem: "vfat"
+          mount_point: "/boot/efi"
+          flags: ["boot"]
+          
+        - number: 2
+          type: "system"
+          size: "50G"
+          filesystem: "ext4"
+          mount_point: "/"
+          options: ["noatime", "errors=remount-ro"]
+          
+        - number: 3
+          type: "swap"
+          size: "8G"
+          filesystem: "swap"
+          
+        - number: 4
+          type: "home"
+          size: "remaining"
+          filesystem: "ext4"
+          mount_point: "/home"
+          options: ["noatime", "user_xattr"]
+          
+  lvm:
+    enabled: false
+    volume_groups:
+      - name: "vg_system"
+        physical_volumes: ["/dev/sda2"]
+        logical_volumes:
+          - name: "lv_root"
+            size: "30G"
+            filesystem: "ext4"
+            mount_point: "/"
+          - name: "lv_home"
+            size: "remaining"
+            filesystem: "ext4"
+            mount_point: "/home"
+            
+  encryption:
+    enabled: false
+    method: "luks2"
+    key_file: "/etc/cryptsetup/keyfile"
+    devices:
+      - name: "crypt_root"
+        device: "/dev/sda2"
+        password: ""
+        
+# 사용자 및 그룹 설정
+users:
+  default_groups: ["users", "audio", "video", "input", "games", "network"]
+  default_shell: "/bin/bash"
+  password_policy:
+    min_length: 8
+    require_uppercase: true
+    require_lowercase: true
+    require_numbers: true
+    require_special: false
+    max_age_days: 90
+    history_count: 10
+    
+  users:
+    - username: "root"
+      uid: 0
+      gid: 0
+      home: "/root"
+      shell: "/bin/bash"
+      groups: ["root"]
+      password_locked: false
+      
+    - username: "admin"
+      uid: 1000
+      gid: 1000
+      home: "/home/admin"
+      shell: "/bin/bash"
+      groups: ["users", "wheel", "sudo", "audio", "video"]
+      sudo_access: true
+      create_home: true
+      
+  sudoers:
+    - user: "admin"
+      permissions: "ALL=(ALL) ALL"
+    - group: "wheel"
+      permissions: "ALL=(ALL) ALL"
+    - group: "sudo"
+      permissions: "ALL=(ALL) NOPASSWD: ALL"
+
+# 서비스 설정
+services:
+  enabled:
+    - "systemd-networkd"
+    - "systemd-resolved"
+    - "sshd"
+    - "cron"
+    - "dbus"
+    - "avahi-daemon"
+    
+  disabled:
+    - "bluetooth"
+    - "cups"
+    - "pulseaudio"
+    
+  custom_services:
+    - name: "massive-pkg-manager"
+      description: "Massive Package Manager Daemon"
+      exec_start: "/usr/local/bin/massive-pkg-manager --daemon"
+      exec_reload: "/bin/kill -HUP $MAINPID"
+      restart: "always"
+      user: "root"
+      group: "root"
+      
+    - name: "system-monitor"
+      description: "System Monitoring Service"
+      exec_start: "/usr/local/bin/system-manager --daemon"
+      restart: "always"
+      user: "root"
+      group: "root"
+
+# 부트로더 설정
+bootloader:
+  type: "grub"
+  timeout: 5
+  default_entry: 0
+  entries:
+    - title: "Massive OS"
+      root: "/dev/sda2"
+      kernel: "/boot/vmlinuz-linux"
+      initrd: "/boot/initramfs-linux.img"
+      options: ["quiet", "splash", "resume=UUID=swap-uuid"]
+      
+  secure_boot:
+    enabled: false
+    keys:
+      enrollment: "manual"
+      
+# 패키지 관리 설정
+package_manager:
+  repositories:
+    - name: "core"
+      url: "https://repo.massive-os.org/core"
+      priority: 1
+      enabled: true
+      
+    - name: "extra"
+      url: "https://repo.massive-os.org/extra"
+      priority: 2
+      enabled: true
+      
+    - name: "community"
+      url: "https://repo.massive-os.org/community"
+      priority: 3
+      enabled: true
+      
+  cache:
+    enabled: true
+    directory: "/var/cache/massive-pkg"
+    max_size: "5G"
+    cleanup_interval: "weekly"
+    
+  auto_update:
+    enabled: false
+    schedule: "weekly"
+    exclude_packages: ["kernel", "systemd"]
+    
+  mirrors:
+    - country: "KR"
+      urls:
+        - "https://kr.mirror.massive-os.org"
+        - "https://mirror.kakao.com/massive-os"
+    - country: "US"
+      urls:
+        - "https://us.mirror.massive-os.org"
+        - "https://mirror.sfo12.massive-os.org"
+
+# 보안 설정
+security:
+  selinux:
+    enabled: false
+    mode: "enforcing"
+    policy: "targeted"
+    
+  apparmor:
+    enabled: true
+    mode: "enforce"
+    
+  pam:
+    password_auth: true
+    sshd_auth: true
+    login_limits: true
+    
+  fail2ban:
+    enabled: true
+    jails:
+      - name: "sshd"
+        enabled: true
+        max_retry: 3
+        find_time: 600
+        ban_time: 3600
+        
+      - name: "http"
+        enabled: true
+        max_retry: 5
+        find_time: 300
+        ban_time: 1800
+        
+  kernel_security:
+    randomize_va_space: 2
+    dmesg_restriction: 1
+    kptr_restrict: 2
+    exec_shield: 1
+    
+# 로깅 설정
+logging:
+  journald:
+    storage: "persistent"
+    compress: true
+    seal: true
+    split_mode: "uid"
+    rate_limit_interval: "30s"
+    rate_limit_burst: 1000
+    
+  syslog:
+    facility: "daemon"
+    priority: "info"
+    destination: "/var/log/syslog"
+    max_size: "100M"
+    rotate_count: 7
+    
+  logrotate:
+    enabled: true
+    schedule: "daily"
+    compress: true
+    delaycompress: true
+    
+    logs:
+      - path: "/var/log/syslog"
+        max_size: "50M"
+        rotate_count: 7
+        compress: true
+        
+      - path: "/var/log/auth.log"
+        max_size: "20M"
+        rotate_count: 4
+        compress: true
+
+# 성능 튜닝
+performance:
+  cpu:
+    governor: "ondemand"
+    scaling_min_freq: "800MHz"
+    scaling_max_freq: "3.0GHz"
+    
+  memory:
+    swappiness: 10
+    vfs_cache_pressure: 50
+    dirty_ratio: 15
+    dirty_background_ratio: 5
+    
+  disk:
+    read_ahead_kb: 128
+    nr_requests: 256
+    queue_scheduler: "mq-deadline"
+    
+  network:
+    tcp_congestion_control: "bbr"
+    tcp_window_scaling: 1
+    tcp_timestamps: 1
+    
+# 백업 설정
+backup:
+  enabled: true
+  schedule: "daily"
+  retention_days: 30
+  compression: "gzip"
+  
+  sources:
+    - path: "/etc"
+      include: ["*.conf", "*.yaml", "*.json"]
+      exclude: ["*.tmp", "*.bak"]
+      
+    - path: "/home"
+      include: ["*/Documents", "*/Pictures", "*/Videos"]
+      exclude: ["*/.cache", "*/tmp", "*/.local/share/Trash"]
+      
+    - path: "/var/log"
+      include: ["*.log"]
+      exclude: ["*.gz", "*.old"]
+      
+  destinations:
+    - type: "local"
+      path: "/backup"
+      
+    - type: "remote"
+      host: "backup.example.com"
+      user: "backup"
+      path: "/backups/massive-os"
+      
+# 모니터링 설정
+monitoring:
+  system_metrics:
+    cpu_usage:
+      enabled: true
+      threshold: 80
+      interval: 30
+      
+    memory_usage:
+      enabled: true
+      threshold: 90
+      interval: 30
+      
+    disk_usage:
+      enabled: true
+      threshold: 85
+      interval: 300
+      
+    network_traffic:
+      enabled: true
+      interval: 60
+      
+  alerts:
+    email:
+      enabled: false
+      smtp_server: "smtp.example.com"
+      smtp_port: 587
+      username: "alerts@example.com"
+      password: ""
+      recipients: ["admin@example.com"]
+      
+    webhook:
+      enabled: false
+      url: "https://hooks.slack.com/services/xxx/yyy/zzz"
+      
+# 개발자 설정
+development:
+  compilers:
+    gcc:
+      version: "latest"
+      default: true
+      
+    clang:
+      version: "latest"
+      default: false
+      
+  languages:
+    python:
+      version: "3.11"
+      packages: ["pip", "virtualenv", "numpy", "scipy"]
+      
+    nodejs:
+      version: "18"
+      packages: ["npm", "yarn"]
+      
+    java:
+      version: "17"
+      packages: ["maven", "gradle"]
+      
+    go:
+      version: "latest"
+      
+    rust:
+      version: "latest"
+      
+  databases:
+    postgresql:
+      version: "15"
+      enabled: false
+      
+    mysql:
+      version: "8.0"
+      enabled: false
+      
+    redis:
+      version: "7"
+      enabled: false
+      
+    mongodb:
+      version: "6"
+      enabled: false
+      
+  containers:
+    docker:
+      enabled: false
+      version: "latest"
+      
+    podman:
+      enabled: false
+      version: "latest"
+      
+# 멀티미디어 설정
+multimedia:
+  audio:
+    server: "pipewire"
+    devices: ["pulse", "alsa"]
+    
+  video:
+    drivers: ["intel", "nvidia"]
+    acceleration: true
+    
+  codecs:
+    enabled: true
+    packages: ["ffmpeg", "gstreamer", "vlc"]
+    
+# 게이밍 설정
+gaming:
+  steam:
+    enabled: false
+    runtime: true
+    
+  wine:
+    enabled: false
+    version: "stable"
+    
+  emulators:
+    enabled: false
+    packages: ["retroarch", "dolphin-emu"]
+    
+# 접근성 설정
+accessibility:
+  screen_reader:
+    enabled: false
+    engine: "espeak"
+    
+  high_contrast:
+    enabled: false
+    
+  large_text:
+    enabled: false
+    scale_factor: 1.2
+    
+  keyboard:
+    sticky_keys: false
+    slow_keys: false
+    
+# 전원 관리
+power_management:
+  sleep_mode:
+    enabled: true
+    timeout: 1800  # 30 minutes
+    
+  hibernate:
+    enabled: false
+    timeout: 7200  # 2 hours
+    
+  suspend:
+    enabled: true
+    timeout: 900   # 15 minutes
+    
+  battery:
+    critical_level: 5
+    low_level: 20
+    action_on_critical: "hibernate"

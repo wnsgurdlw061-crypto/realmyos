@@ -1,0 +1,84 @@
+# Minimal Variant (800MB) - 극단적 경량화
+# UnifiedArch OS Minimal Package List
+
+# Base system (minimal)
+base
+linux
+linux-firmware
+
+# Essential network
+iproute2
+iputils
+net-tools
+wireless_tools
+wpa_supplicant
+
+# Basic display drivers
+xf86-video-intel
+xf86-video-amdgpu
+xf86-video-vesa
+mesa
+
+# Minimal desktop (i3 window manager)
+i3-wm
+i3status
+i3lock
+dmenu
+xorg-server
+xorg-xinit
+xorg-xrandr
+xorg-xsetroot
+
+# Terminal and basic tools
+alacritty
+vim
+nano
+fish
+git
+curl
+wget
+
+# File management
+ranger
+mc
+pcmanfm
+
+# System monitoring
+htop
+tree
+neofetch
+
+# Network tools
+networkmanager
+nm-connection-editor
+
+# Basic multimedia
+feh
+mpv
+alsa-utils
+
+# Compression utilities
+tar
+gzip
+unzip
+zip
+
+# Text editor
+vim
+nano
+
+# Browser (lightweight)
+qutebrowser
+
+# Security
+openssh
+openssl
+
+# Fonts
+noto-fonts
+ttf-liberation
+
+# UnifiedArch specific packages (minimal)
+unifiedarch-installer
+unifiedarch-kernel-modules
+unifiedarch-config-minimal

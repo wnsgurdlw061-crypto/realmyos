@@ -1,0 +1,184 @@
+# UnifiedArch OS Package List
+# x86_64 아키텍처용 패키지 목록
+
+# ========== 기본 시스템 ==========
+base
+base-devel
+linux
+linux-firmware
+linux-headers
+
+# ========== 설치 도구 ==========
+arch-install-scripts
+pacman
+pacman-contrib
+archiso
+calamares
+calamares-branding-unifiedarch
+
+# ========== 네트워크 ==========
+networkmanager
+network-manager-applet
+wireless_tools
+wpa_supplicant
+wpa_actiond
+bluez
+bluez-utils
+iwd
+modemmanager
+usb_modeswitch
+
+# ========== 하드웨어 드라이버 ==========
+mesa
+vulkan-radeon
+vulkan-intel
+vulkan-mesa-layers
+xf86-video-amdgpu
+xf86-video-intel
+xf86-video-nouveau
+xf86-video-vesa
+xf86-video-vmware
+libva-mesa-driver
+mesa-vdpau
+opencl-mesa
+vulkan-tools
+
+# ========== 오디오 ==========
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+wireplumber
+alsa-utils
+alsa-plugins
+pulseaudio-alsa
+sof-firmware
+
+# ========== 데스크톱 환경 (GNOME) ==========
+gnome
+gnome-extra
+gnome-tweaks
+gnome-shell-extensions
+gdm
+nautilus
+gnome-terminal
+gnome-control-center
+gnome-calculator
+gnome-calendar
+gnome-weather
+gnome-maps
+gnome-contacts
+gnome-clocks
+gnome-photos
+gnome-music
+gnome-videos
+gnome-screenshot
+gnome-system-monitor
+
+# ========== 기본 애플리케이션 ==========
+firefox
+libreoffice-fresh
+evince
+vlc
+gimp
+inkscape
+shotwell
+cheese
+totem
+rhythmbox
+
+# ========== 개발 도구 ==========
+git
+vim
+neovim
+code
+make
+gcc
+clang
+python
+python-pip
+python-setuptools
+nodejs
+npm
+rust
+go
+
+# ========== 시스템 도구 ==========
+gparted
+baobab
+gnome-disks
+udisks2
+seahorse
+dconf-editor
+htop
+btop
+tmux
+screen
+mc
+tree
+jq
+rsync
+lsof
+strace
+ltrace
+gdb
+
+# ========== 파일 아카이브 ==========
+unzip
+unrar
+p7zip
+zip
+tar
+gzip
+bzip2
+xz
+zstd
+
+# ========== 폰트 ==========
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
+ttf-liberation
+ttf-dejavu
+ttf-bitstream-vera
+adobe-source-code-pro-fonts
+adobe-source-sans-fonts
+adobe-source-serif-fonts
+
+# ========== 터미널 ==========
+bash-completion
+zsh
+zsh-completions
+zsh-syntax-highlighting
+zsh-autosuggestions
+fish
+
+# ========== 보안 ==========
+gnupg
+openssh
+sshfs
+ufw
+firewalld
+apparmor
+apparmor-profiles
+arch-audit
+
+# ========== 컨테이너/가상화 ==========
+docker
+docker-compose
+podman
+buildah
+qemu-guest-agent
+virtualbox-guest-utils
+
+# ========== 시스템 서비스 ==========
+systemd-sysvcompat
+systemd-resolvconf
+cronie
+logrotate
+haveged
+fstrim
+
+# ========== UnifiedArch 고유 패키지 ==========
+# (빌드 시 추가됨)

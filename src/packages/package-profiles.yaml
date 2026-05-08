@@ -1,0 +1,313 @@
+# UnifiedArch OS 패키지 프로필 설정
+# 사용자 프로필에 따른 패키지 조합 정의
+
+profiles:
+  # 초보자 프로필
+  beginner:
+    description: "Windows 사용자를 위한 친숙한 환경"
+    desktop: "gnome"
+    packages:
+      essential:
+        - "base"
+        - "base-devel"
+        - "linux"
+        - "linux-firmware"
+        - "networkmanager"
+        - "bluez"
+        - "cups"
+        - "pulseaudio"
+        - "alsa-utils"
+      desktop:
+        - "gnome"
+        - "gnome-extra"
+        - "gdm"
+        - "nautilus"
+        - "gnome-terminal"
+      applications:
+        - "firefox"
+        - "libreoffice-still"
+        - "vlc"
+        - "gnome-calendar"
+        - "gnome-weather"
+        - "gnome-maps"
+      fonts:
+        - "noto-fonts"
+        - "noto-fonts-cjk"
+        - "noto-fonts-emoji"
+
+  # 일반 사용자 프로필  
+  general:
+    description: "데스크톱/노트북 사용자"
+    desktop: "kde"
+    packages:
+      essential:
+        - "base"
+        - "base-devel"
+        - "linux"
+        - "linux-firmware"
+        - "networkmanager"
+        - "bluez"
+        - "cups"
+        - "pulseaudio"
+        - "alsa-utils"
+      desktop:
+        - "plasma"
+        - "plasma-meta"
+        - "sddm"
+        - "dolphin"
+        - "konsole"
+      applications:
+        - "firefox"
+        - "libreoffice-fresh"
+        - "vlc"
+        - "kdenlive"
+        - "gimp"
+        - "inkscape"
+        - "thunderbird"
+      multimedia:
+        - "kodi"
+        - "audacious"
+        - "obs-studio"
+      fonts:
+        - "noto-fonts"
+        - "noto-fonts-cjk"
+        - "noto-fonts-emoji"
+        - "ttf-liberation"
+
+  # 개발자 프로필
+  developer:
+    description: "프로그래밍 및 개발"
+    desktop: "i3"
+    packages:
+      essential:
+        - "base"
+        - "base-devel"
+        - "linux"
+        - "linux-firmware"
+        - "networkmanager"
+        - "bluez"
+        - "git"
+        - "vim"
+        - "neovim"
+      desktop:
+        - "i3-wm"
+        - "i3lock"
+        - "i3status"
+        - "dmenu"
+        - "rxvt-unicode"
+      development:
+        - "python"
+        - "python-pip"
+        - "nodejs"
+        - "npm"
+        - "rust"
+        - "go"
+        - "java-runtime"
+        - "maven"
+        - "docker"
+        - "docker-compose"
+        - "vscode"
+      databases:
+        - "postgresql"
+        - "redis"
+        - "sqlite"
+      tools:
+        - "postman-bin"
+        - "insomnia"
+        - "wireshark-qt"
+
+  # 시스템 관리자 프로필
+  administrator:
+    description: "기업 및 서버 관리"
+    desktop: "none"
+    packages:
+      essential:
+        - "base"
+        - "base-devel"
+        - "linux-lts"
+        - "linux-firmware"
+        - "networkmanager"
+      server:
+        - "openssh"
+        - "fail2ban"
+        - "ufw"
+        - "selinux"
+        - "apparmor"
+      monitoring:
+        - "prometheus"
+        - "grafana"
+        - "nagios"
+        - "zabbix"
+      containers:
+        - "docker"
+        - "podman"
+        - "kubernetes"
+        - "minikube"
+      automation:
+        - "ansible"
+        - "terraform"
+        - "jenkins"
+      networking:
+        - "nmap"
+        - "tcpdump"
+        - "wireshark-cli"
+        - "bind-tools"
+
+  # IoT/임베디드 프로필
+  iot:
+    description: "경량 시스템 및 IoT"
+    desktop: "none"
+    packages:
+      essential:
+        - "base"
+        - "linux"
+        - "linux-firmware"
+      networking:
+        - "networkmanager"
+        - "wpa_supplicant"
+        - "bluez"
+      tools:
+        - "vim"
+        - "git"
+        - "curl"
+        - "wget"
+      hardware:
+        - "raspberry-pi-bootloader"
+        - "arduino-cli"
+      monitoring:
+        - "htop"
+        - "iotop"
+        - "nethogs"
+
+  # 게이머 프로필
+  gamer:
+    description: "게이밍 성능 최적화"
+    desktop: "gnome"
+    packages:
+      essential:
+        - "base"
+        - "base-devel"
+        - "linux-zen"
+        - "linux-firmware"
+        - "networkmanager"
+        - "pulseaudio"
+        - "alsa-utils"
+      desktop:
+        - "gnome"
+        - "gnome-extra"
+        - "gdm"
+      gaming:
+        - "steam"
+        - "lutris"
+        - "wine"
+        - "protontricks"
+        - "gamemode"
+        - "mangohud"
+      drivers:
+        - "nvidia-dkms"
+        - "nvidia-settings"
+        - "vulkan-driver"
+        - "lib32-vulkan-driver"
+      tools:
+        - "obs-studio"
+        - "discord"
+        - "teamspeak"
+
+  # 보안 연구자 프로필
+  security:
+    description: "보안 도구 및 분석"
+    desktop: "kde"
+    packages:
+      essential:
+        - "base"
+        - "base-devel"
+        - "linux"
+        - "linux-firmware"
+        - "networkmanager"
+      desktop:
+        - "plasma"
+        - "sddm"
+      security_tools:
+        - "nmap"
+        - "wireshark-qt"
+        - "metasploit"
+        - "burpsuite"
+        - "hashcat"
+        - "john"
+        - "sqlmap"
+        - "aircrack-ng"
+        - "owasp-zap"
+      forensics:
+        - "volatility"
+        - "autopsy"
+        - "sleuthkit"
+        - "photorec"
+      encryption:
+        - "gnupg"
+        - "veracrypt"
+        - "cryptsetup"
+        - "tor-browser"
+
+# 변형 버전별 기본 패키지
+variants:
+  standard:
+    inherits: "general"
+    additional_packages:
+      - "libreoffice-fresh"
+      - "vlc"
+      - "gimp"
+      - "inkscape"
+
+  minimal:
+    inherits: "iot"
+    additional_packages:
+      - "xorg-server"
+      - "xorg-xinit"
+      - "i3-wm"
+      - "dmenu"
+
+  enterprise:
+    inherits: "administrator"
+    additional_packages:
+      - "docker"
+      - "kubernetes"
+      - "prometheus"
+      - "grafana"
+
+  gaming:
+    inherits: "gamer"
+    additional_packages:
+      - "steam"
+      - "protontricks"
+      - "gamemode"
+      - "mangohud"
+
+# 저장소 설정
+repositories:
+  core:
+    description: "필수 패키지"
+    priority: 1
+  extra:
+    description: "확장 패키지"
+    priority: 2
+  community:
+    description: "커뮤니티 패키지"
+    priority: 3
+  multilib:
+    description: "32비트 호환"
+    priority: 4
+    enabled_for:
+      - "gamer"
+      - "developer"
+  custom_lts:
+    description: "LTS 안정 버전"
+    priority: 5
+    enabled_for:
+      - "enterprise"
+      - "administrator"
+  custom_bleeding:
+    description: "최신 버전"
+    priority: 6
+    enabled_for:
+      - "gamer"
+      - "developer"
