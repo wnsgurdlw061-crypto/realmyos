@@ -1,0 +1,32 @@
+# User-provided focus tags
+schema: 1
+tags:
+  - Web
+  - hop
+  - proxy
+  - Zip
+  - SSL
+  - ActionScript
+  - Network
+  - WAF
+  - password
+  - VoIP
+  - Active
+  - LDAP
+  - Bloodhound
+  - Assessment
+  - post-exploitation
+  - pentest
+  - AD
+  - admin
+  - password
+  - DNS
+  - SNMP
+  - winPEAS
+  - Machine
+  - AES
+  - aff-images
+  - AI/ML
+  - DNS
+  - forensic
+  - aireplay
