@@ -1,0 +1,44 @@
+name: Build UnifiedArch ISO
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+
+jobs:
+  archiso-build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm archiso git rsync squashfs-tools xorriso dosfstools grub mtools
+
+      - name: Inject unified repository profile
+        run: |
+          mkdir -p build/iso/profile
+          cp config/repos/pacman-unified.conf build/iso/profile/pacman.conf
+
+      - name: Merge requested AI/security toolset
+        run: |
+          chmod +x scripts/add-toolset-packages.sh
+          ./scripts/add-toolset-packages.sh config/toolsets/ai-arch-extra-tools.txt build/iso/profile/packages.x86_64
+
+      - name: Build ISO
+        run: |
+          chmod +x scripts/build-iso-archiso.sh
+          PROFILE_DIR=build/iso/profile OUT_DIR=out WORK_DIR=work ./scripts/build-iso-archiso.sh
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: unifiedarch-iso
+          path: out/*.iso
